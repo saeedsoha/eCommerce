@@ -29,7 +29,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+
+        $notfication = array(
+            'message' => 'You are successfully Loged in!',
+            'alert-type' => 'success',
+
+        );
+
+        return redirect()->intended(RouteServiceProvider::HOME)->with($notfication);
+
     }
 
     /**
@@ -42,6 +50,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+     
 
         return redirect('/');
     }
